@@ -1,27 +1,30 @@
 # moveo_ros
 ROS packages that can be used to plan and execute motion trajectories for the BCN3D Moveo robotic arm in simulation and real-life.
-### [Video Demo Here!](https://youtu.be/2RcTTqs17O8)
 
-- **_New Feature_: Object-Specific Pick and Place** (With an ordinary webcam, Tensorflow, OpenCV, and ROS, you can 'pick and place' (or sort) objects that are detected in real-time)
-	- **[Video Demo](https://youtu.be/kkUbyFa2MWc)**
-	- **[How to Use](https://github.com/jesseweisberg/moveo_ros/tree/master/moveo_moveit/scripts)**
-
-
+## Demo
+- **[Motion trajectories](https://youtu.be/2RcTTqs17O8)**
+- **[Object-Specific Pick and Place](https://youtu.be/kkUbyFa2MWc)**
 
 ## How to Use:
 
+### Setup environment
+If you don't have ROS installed with a functioning workspace, you can run the next commands to execute script that prepare environment required to use this project.
+```bash
+wget https://raw.githubusercontent.com/urbots/moveo_ros/master/setup_environment.sh
+chmod u+x setup_environment.sh
+./setup_environment.sh
+```
+
 ### Getting the BCN3D Simulation Working with Motion Planning
-![moveit_screenshot.png](/moveit_screenshot.png)
 
-1. Make sure you have ROS installed correctly with a functioning workspace-- I used ROS Kinetic on Ubuntu 16.04 (if you have a different distro, you may need to change some things).  I currently have 'moveo_ros' in the 'src' folder of my catkin workspace.
-
-2. To plan and execute trajectories for the Moveo in simulation (RVIZ with Moveit plugin), execute the following terminal command:
+1. To plan and execute trajectories for the Moveo in simulation (RVIZ with Moveit plugin), execute the following terminal command:
 	```
 	roslaunch moveo_moveit_config demo.launch
 	```
 
-3. Once the window loads, in the bottom-left corner check "Allow Approximate IK Solutions."  Then click on the "Planning" tab in the MotionPlanning panel of RVIZ.  Select a new goal state by either dragging the interactive marker (light blue ball on the end effector) or under "Select Goal State."  Once goal state is updated, "Plan and Execute" will plan and execute the trajectory from the start state to the updated goal state.
+2. Once the window loads, in the bottom-left corner check "Allow Approximate IK Solutions."  Then click on the "Planning" tab in the MotionPlanning panel of RVIZ.  Select a new goal state by either dragging the interactive marker (light blue ball on the end effector) or under "Select Goal State."  Once goal state is updated, "Plan and Execute" will plan and execute the trajectory from the start state to the updated goal state.
 
+![moveit_screenshot.png](/moveit_screenshot.png)
 
 ### Moving the real robot, synced with the simulated robot's trajectories.
 4. Make sure you download the AccelStepper ([AccelStepper Library Download](http://www.airspayce.com/mikem/arduino/AccelStepper/AccelStepper-1.57.zip)) and ros_lib ([rosserial-arduino tutorial](http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup)) libraries into your Arduino environment.
@@ -37,6 +40,10 @@ ROS packages that can be used to plan and execute motion trajectories for the BC
 	- ```rostopic pub gripper_angle std_msgs/UInt16 <angle 0-180> ```(publishes gripper_angle)
 
 **Now, whatever trajectories are planned and executed in simulation are echoed on the real robot.**
+
+## Object-Specific Pick and Place
+With an ordinary webcam, Tensorflow, OpenCV, and ROS, you can 'pick and place' (or sort) objects that are detected in real-time.
+- **[How to Use](https://github.com/jesseweisberg/moveo_ros/tree/master/moveo_moveit/scripts)**
 
 ## About Directories
 ### moveo_urdf
